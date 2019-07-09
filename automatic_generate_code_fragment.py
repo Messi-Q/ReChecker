@@ -2,22 +2,6 @@ import os
 import re
 import csv
 
-var_list = ['balances[msg.sender]', 'participated[msg.sender]', 'playerPendingWithdrawals[msg.sender]',
-            'nonces[msgSender]', 'balances[beneficiary]', 'transactions[transactionId]', 'tokens[token][msg.sender]',
-            'totalDeposited[token]', 'tokens[0][msg.sender]', 'accountBalances[msg.sender]', 'accountBalances[_to]',
-            'creditedPoints[msg.sender]', 'balances[from]', 'withdrawalCount[from]',
-            'balances[recipient]', 'investors[_to]', 'Bal[msg.sender]', 'Accounts[msg.sender]',
-            'Holders[_addr]', 'balances[_pd]', 'ExtractDepositTime[msg.sender]', 'Bids[msg.sender]',
-            'participated[msg.sender]', 'deposited[_participant]', 'Transactions[TransHash]', 'm_txs[_h]',
-            'balances[investor]', 'this.balance', 'proposals[_proposalID]', 'accountBalances[accountAddress]',
-            'Chargers[id]', 'latestSeriesForUser[msg.sender]', 'balanceOf[_addressToRefund]',
-            'tokenManage[token_]', 'milestones[_idMilestone]', 'payments[msg.sender]', 'rewardsForA[recipient]',
-            'userBalance[msg.sender]', 'credit[msg.sender]', 'credit[to]', 'round_[_rd]',
-            'userPendingWithdrawals[msg.sender]']
-
-
-# delete: 'msg.value', 'msg.sender', 'balances[to]', 'balances[_to]'
-
 
 # 函数分割
 def split_function(filepath):

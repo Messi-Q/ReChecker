@@ -5,8 +5,8 @@ def parameter_parser():
     # Experiment parameters
     parser = argparse.ArgumentParser(description='Smart Contracts Reentrancy Detection')
 
-    parser.add_argument('-D', '--dataset', type=str, default='./data/SmartContract.txt',
-                        choices=['SmartContract.txt', 'SmartContractFull.txt'])
+    parser.add_argument('-D', '--dataset', type=str, default='data/SmartContract.txt',
+                        choices=['data/SmartContract.txt', 'data/SmartContractFull.txt'])
     parser.add_argument('-M', '--model', type=str, default='BLSTM',
                         choices=['BLSTM', 'BLSTM_Attention', 'LSTM_Model', 'GRU_Model'])
     parser.add_argument('--lr', type=float, default=0.002, help='learning rate')
