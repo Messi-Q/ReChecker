@@ -1,5 +1,4 @@
 # VulDeeSmartContract
-<<<<<<< HEAD
 
 This package is a python implementation of smart contract vulnerability detection based on deep learning. In previous studies,
 [VulDeePecker](https://arxiv.org/abs/1801.01681) is a design and implementation of a deep learning-based vulnerability detection system. Moreover, they present the first vulnerability dataset for deep learning approaches. 
