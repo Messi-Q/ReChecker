@@ -24,7 +24,7 @@ pip install pandas
 pip install scikit-learn
 ```
 
-#### Required Dataset
+### Required Dataset
 This repository contains all necessary for the smart contract dataset. For the dataset, we crawled the source code of 
 the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected 
 some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities.
@@ -41,7 +41,7 @@ So far, we have completed the following work:
 * Trained on the reentrancy vulnerability to detect exploitable code in solidity.
 * Provides the trainable smart contract code fragment dataset.
 
-#### Reentrancy
+### Reentrancy
 **Reentrancy vulnerability:** When an attacker initiates a transfer operation to a contract address, 
 it will force the execution of the fallback function of the attack contract itself. 
 The fallback function then contains the callback's own code, which causes the code to "re-enter" the contract.
@@ -61,12 +61,12 @@ Therefore, in the current severe security contract vulnerability, an effective s
 is urgently needed to detect contract-related vulnerabilities. It is very necessary and useful to design and implement 
 a smart contract security vulnerability detection device. 
 
-#### Data
+### Data
 Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidity programs). In total, 
 the Code Fragment database contains 1470 code fragments, including 197 code gadgets that are vulnerable and 1273 code gadgets that are not vulnerable. 
 Due to the limited number of smart contracts on Ethereum, we reused some smart contracts.
 
-##### How to construct the code fragment?
+#### How to construct the code fragment?
 * Remove all comments from the solidity source code. Remove comment tool available [here](https://github.com/Messi-Q/Automation-Tools/blob/master/delete_comment_official.py)
 * Find the function where call.value is in the contract and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
@@ -97,7 +97,7 @@ ${VulDeeSmartContract}
 
 We have implemented a function that automatically extracts code fragments and presents them in this repository.
 
-#### Models
+### Models
 
 **LSTM** 
 
@@ -117,7 +117,7 @@ python SmConVulDetector.py --model GRU_Model  # to run GRU
 python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 ```
 
-#### Code Files
+### Code Files
 
 1. `SmConVulDetector.py`
 * Interface to project, uses functionality from other code files.
@@ -135,7 +135,7 @@ python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 * Find the function where call.value is located and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
 
-#### Running project
+### Running project
 * To run program, use this command: python SmConVulDetector.py --dataset [code_fragment_file], where code_fragment_file is one of the text files containing a fragment set.
 * In addition, you can use specific hyperparameters to train the model. All the hyperparameters can be found in `parser.py`.
 
@@ -170,7 +170,7 @@ These results were obtained by running:
 `
 * TODO: At present, Not yet given ten averages and standard deviations
 
-## other
+## Other
 
 **basic**
 For this, we try to use the word segmentation method to train smart contract dataset. 
@@ -185,4 +185,3 @@ pip install torchtext
 1. Zhen Li, Deqing Zou, Shouhuai Xu, Xinyu Ou, Hai Jin, Sujuan Wang, Zhijun Deng and Yuyi Zhong. [VulDeePecker: A Deep Learning-Based System for Vulnerability Detection](https://arxiv.org/abs/1801.01681).
 2. VulDeePecker algorithm implemented in Python. [VDPython](https://github.com/johnb110/VDPython).
 3. A set of tutorials for torchtext. [practical-torchtext](https://github.com/keitakurita/practical-torchtext).
-
