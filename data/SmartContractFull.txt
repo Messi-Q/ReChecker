@@ -249,7 +249,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 17 Reentrance_02.sol
 function withdraw(uint _amount) public {
@@ -645,7 +645,7 @@ vars.totalCredits -= uint88(_amt);
 credits[_user] -= _amt;
 require(_user.call.value(_amt)());
 emit CreditsCashedout(now, _user, _amt);
-0
+1
 ---------------------------------
 37 27188.sol
 function loggedTransfer(uint amount, bytes32 message, address target, address currentOwner) protected {
@@ -2284,7 +2284,7 @@ function multiCall(address[] _address, uint[] _amount) payable public returns(bo
 for (uint i = 0; i < _address.length; i++) {
 _safeCall(_address[i], _amount[i]);
 return true;
-0
+1
 ---------------------------------
 140 17009.sol
 function Pay(address _destination) public payable {
@@ -2583,7 +2583,7 @@ return (false, _safeFalse());
 return (true, _applyRefund(startGas));
 function checkForward(bytes _data) constant returns(bool, bool) {
 return _forward(allowedForwards[sha3(_data[0], _data[1], _data[2], _data[3])], _data);
-0
+1
 ---------------------------------
 165 10107.sol
 function transfer(address to, uint value, bytes data, string customFallback) public returns (bool) {
@@ -3570,7 +3570,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 228 21886.sol
 function buy(address recipient, uint256 value) public payable {
@@ -3590,7 +3590,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 229 774.sol
 function distributeExternal(uint256 _pID, uint256 _eth, uint256 _affID, FDDdatasets.EventReturns memory _eventData_) private returns(FDDdatasets.EventReturns) {
@@ -8801,7 +8801,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 459 Reentrance_02.sol
 function withdraw(uint _amount) public {
@@ -9197,7 +9197,7 @@ vars.totalCredits -= uint88(_amt);
 credits[_user] -= _amt;
 require(_user.call.value(_amt)());
 emit CreditsCashedout(now, _user, _amt);
-0
+2
 ---------------------------------
 479 27188.sol
 function loggedTransfer(uint amount, bytes32 message, address target, address currentOwner) protected {
@@ -10836,7 +10836,7 @@ function multiCall(address[] _address, uint[] _amount) payable public returns(bo
 for (uint i = 0; i < _address.length; i++) {
 _safeCall(_address[i], _amount[i]);
 return true;
-0
+1
 ---------------------------------
 582 17009.sol
 function Pay(address _destination) public payable {
@@ -11135,7 +11135,7 @@ return (false, _safeFalse());
 return (true, _applyRefund(startGas));
 function checkForward(bytes _data) constant returns(bool, bool) {
 return _forward(allowedForwards[sha3(_data[0], _data[1], _data[2], _data[3])], _data);
-0
+1
 ---------------------------------
 607 10107.sol
 function transfer(address to, uint value, bytes data, string customFallback) public returns (bool) {
@@ -12122,7 +12122,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 670 21886.sol
 function buy(address recipient, uint256 value) public payable {
@@ -12142,7 +12142,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 671 774.sol
 function distributeExternal(uint256 _pID, uint256 _eth, uint256 _affID, FDDdatasets.EventReturns memory _eventData_) private returns(FDDdatasets.EventReturns) {
@@ -17353,7 +17353,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 901 Reentrance_02.sol
 function withdraw(uint _amount) public {
@@ -17749,7 +17749,7 @@ vars.totalCredits -= uint88(_amt);
 credits[_user] -= _amt;
 require(_user.call.value(_amt)());
 emit CreditsCashedout(now, _user, _amt);
-0
+3
 ---------------------------------
 921 27188.sol
 function loggedTransfer(uint amount, bytes32 message, address target, address currentOwner) protected {
@@ -19388,7 +19388,7 @@ function multiCall(address[] _address, uint[] _amount) payable public returns(bo
 for (uint i = 0; i < _address.length; i++) {
 _safeCall(_address[i], _amount[i]);
 return true;
-0
+1
 ---------------------------------
 1024 17009.sol
 function Pay(address _destination) public payable {
@@ -19687,7 +19687,7 @@ return (false, _safeFalse());
 return (true, _applyRefund(startGas));
 function checkForward(bytes _data) constant returns(bool, bool) {
 return _forward(allowedForwards[sha3(_data[0], _data[1], _data[2], _data[3])], _data);
-0
+1
 ---------------------------------
 1049 10107.sol
 function transfer(address to, uint value, bytes data, string customFallback) public returns (bool) {
@@ -20674,7 +20674,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 1112 21886.sol
 function buy(address recipient, uint256 value) public payable {
@@ -20694,7 +20694,7 @@ presaleTokenSupply = safeAdd(presaleTokenSupply, tokens);
 Transfer(address(0), recipient, tokens);
 if (!founder.call.value(value)()) throw;
 Buy(recipient, value, tokens);
-0
+1
 ---------------------------------
 1113 774.sol
 function distributeExternal(uint256 _pID, uint256 _eth, uint256 _affID, FDDdatasets.EventReturns memory _eventData_) private returns(FDDdatasets.EventReturns) {

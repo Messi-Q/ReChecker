@@ -2,7 +2,7 @@ import re
 
 # keywords of solidity; immutable set
 keywords = frozenset(
-    {'bool', 'break', 'case', 'catch', 'const', 'continue', 'default', 'do', 'double', 'struct', 'constant',
+    {'bool', 'break', 'case', 'catch', 'const', 'continue', 'default', 'do', 'double', 'struct',
      'else', 'enum', 'payable', 'function', 'modifier', 'emit', 'export', 'extern', 'false', 'constructor',
      'float', 'if', 'contract', 'int', 'long', 'string', 'super', 'or', 'private', 'protected', 'noReentrancy',
      'public', 'return', 'returns', 'assert', 'event', 'indexed', 'using', 'require', 'uint', 'onlyDaoChallenge',

@@ -1,5 +1,4 @@
 # VulDeeSmartContract
-<<<<<<< HEAD
 
 This package is a python implementation of smart contract vulnerability detection based on deep learning. In previous studies,
 [VulDeePecker](https://arxiv.org/abs/1801.01681) is a design and implementation of a deep learning-based vulnerability detection system. Moreover, they present the first vulnerability dataset for deep learning approaches. 
@@ -166,6 +165,7 @@ The performance evaluation results on the `SmartContractFull.txt` dataset are gi
 | LSTM_Attention | 69.62 | 46.15 | 15.00 | 85.00 | 65.38 | 73.91 |
 
 These results were obtained by running:
+
 `python SmConVulDetector.py -D data/SmartContractFull.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 5
 `
 * TODO: At present, Not yet given ten averages and standard deviations
@@ -185,6 +185,4 @@ pip install torchtext
 1. Zhen Li, Deqing Zou, Shouhuai Xu, Xinyu Ou, Hai Jin, Sujuan Wang, Zhijun Deng and Yuyi Zhong. [VulDeePecker: A Deep Learning-Based System for Vulnerability Detection](https://arxiv.org/abs/1801.01681).
 2. VulDeePecker algorithm implemented in Python. [VDPython](https://github.com/johnb110/VDPython).
 3. A set of tutorials for torchtext. [practical-torchtext](https://github.com/keitakurita/practical-torchtext).
-=======
-Smart Contract Vulnerability Detection Based on Deep Learning.
->>>>>>> origin/master
+
