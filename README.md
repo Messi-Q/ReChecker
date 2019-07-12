@@ -45,7 +45,8 @@ At present, the attacker mainly implements reentrancy through the characteristic
 * When the execution fails, all the gas is consumed.
 * It cannot safely prevent reentry attacks.
 
-![Reentrancy](figs/reentrancy.png)
+<div align=center><img width="150" height="150" src="./figs/reentrancy.png"/></div>
+![Reentrancy]()
 
 Reentrancy vulnerabilities have led to the loss of millions of dollars in The DAO attacks, which eventually leads to the hard fork of Ethereum.
 
