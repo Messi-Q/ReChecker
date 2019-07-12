@@ -220,10 +220,10 @@ The performance evaluation of the model is shown in the following table. We also
 
 | Model | Accuracy(%) | False positive rate(FP)(%) | False negative rate(FN)(%) | Recall(%) | Precision(%) | F1 score(%) |
 | ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- |  ------------- |
-| GRU | 75.95 | 23.08 | 25.00 | 75.00 | 76.92 | 75.95 |
-| LSTM | 73.42 | 47.50 | 5.13 | 94.87 | 66.07 | 77.89 |
-| BLSTM | 73.42 | 46.15 | 7.50 | 92.50 | 67.27 | 77.89 |
-| BLSTM+Attention | 69.62 | 46.15 | 15.00 | 85.00 | 65.38 | 73.91 |
+| GRU | 82.33 | 25.17 | 10.23 | **89.77** | 78.28 | 83.49 |
+| LSTM | 81.86 | **25.81** | 10.47 | 89.53 | 77.80 | 83.06 |
+| BLSTM | 85.00 | 19.07 | 10.93 | 89.07 | 83.24 | 85.57 |
+| BLSTM+Attention | **85.69** | 17.21 | **11.40** | 88.60 | **84.82** | **86.26** |
 
 These results were obtained by running:
 
