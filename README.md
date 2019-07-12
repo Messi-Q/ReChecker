@@ -45,14 +45,13 @@ At present, the attacker mainly implements reentrancy through the characteristic
 * When the execution fails, all the gas is consumed.
 * It cannot safely prevent reentry attacks.
 
-<div align=center><img width="150" height="150" src="./figs/reentrancy.png"/></div>
-![Reentrancy]()
+<div align=center><img width="400" height="380" src="./figs/reentrancy.png"/></div>
 
 Reentrancy vulnerabilities have led to the loss of millions of dollars in The DAO attacks, which eventually leads to the hard fork of Ethereum.
 
 The following is an example of a smart contract reentrancy:
 
-![Reentrancy_example](figs/reentrancy_example.png)
+<div align=center><img width="500" height="200" src="./figs/reentrancy_example.png"/></div>
 
 This attack can occur when a contract sends an ether to an unknown address. An attacker can build a contract at an external address that contains malicious code in the fallback function. Therefore, when the contract sends the Ether to this address, the malicious code will be activated.
 
@@ -66,7 +65,8 @@ Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidi
 * Remove all comments from the solidity source code. Remove comment tool available [here](https://github.com/Messi-Q/Automation-Tools/blob/master/delete_comment_official.py)
 * Find the function where call.value is in the contract and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
-![code fragment](figs/code_fragment.png)
+
+<div align=center><img width="600" height="500" src="./figs/code_fragment.png"/></div>
 
 All of the smart contracts dataset in these folders in the following structure respectively.
 ```shell
@@ -97,7 +97,7 @@ We have implemented a function that automatically extracts code fragments and pr
 
 **LSTM** 
 
-![LSTM](figs/LSTM.png)
+<div align=center><img width="500" height="480" src="./figs/LSTM.png"/></div>
 
 **GRU** 
 
