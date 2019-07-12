@@ -42,7 +42,6 @@ class AttentionWithContext(Layer):
     Attention operation, with a context/query vector, for temporal data.
     Supports Masking.
     follows these equations:
-
     (1) u_t = tanh(W h_t + b)
     (2) \alpha_t = \frac{exp(u^T u)}{\sum_t(exp(u_t^T u))}, this is the attention weight
     (3) v_t = \alpha_t * h_t, v in time t

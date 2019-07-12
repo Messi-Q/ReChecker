@@ -2,6 +2,10 @@ import os
 import re
 import csv
 
+"""
+W 函数：调用 call.value 的函数   C 函数：调用 W 函数的函数
+"""
+
 
 # 函数分割
 def split_function(filepath):
@@ -12,7 +16,7 @@ def split_function(filepath):
     flag = -1  # 作为记号
 
     for line in lines:
-        text = line.strip()  # strip是 trim 掉字符串两边的空格。
+        text = line.strip()
         if len(text) > 0 and text != "\n":
             if text.split()[0] == "function" or text.split()[0] == "constructor":
                 function_list.append([text])
@@ -23,17 +27,17 @@ def split_function(filepath):
     return function_list
 
 
-# 定位文件中 call.value 的位置
+# 定位合约中 call.value 的位置
 def find_location(filepath):
     allFunctionList = split_function(filepath)  # 存放所有的函数
     code_fragments = []  # code fragment 代码块
     callValueList = []  # 存放调用 call.value 的 W 函数
-    CFunctionList = []  # 存放调用W函数的所有C函数
+    CFunctionList = []  # 存放调用 W 函数的所有 C 函数
     withdrawNameList = []  # 存放调用 call.value 的 W 函数名
     otherFunctionList = []  # 存储 call.value 以外的函数
     params = []  # 存储 W 函数的参数
 
-    # 存储 call.value 以外的函数
+    # 存储调用 call.value 函数以外的函数
     for i in range(len(allFunctionList)):
         flag = 0
         for j in range(len(allFunctionList[i])):
@@ -43,13 +47,13 @@ def find_location(filepath):
         if flag == 0:
             otherFunctionList.append(allFunctionList[i])
 
-    # (1)遍历所有函数, 找到 call.value 关键字; 将包含 call.value 关键字的函数存入 callValueList & code_fragments;
+    # (1) 遍历所有函数, 找到 call.value 关键字; 将包含 call.value 关键字的函数存入 callValueList & code_fragments;
     for i in range(len(allFunctionList)):
         for j in range(len(allFunctionList[i])):
             text = allFunctionList[i][j]
             if '.call.value' in text:
                 location_i, location_j = i, j  # call.value 所处的位置
-                print("Call Value Location: ", allFunctionList[location_i])  # allFunctionList[location_i]
+                # print("Call Value Location: ", allFunctionList[location_i])  # allFunctionList[location_i]
                 callValueList.append(allFunctionList[location_i])
 
                 # 获取 W 函数的参数
@@ -94,19 +98,18 @@ def find_location(filepath):
                         if result1_params[0] != "" and len(result1_params) == len(params):
                             CFunctionList.append(otherFunctionList[i])
 
-    print("==============================================================>")
-
     for k in range(len(withdrawNameList)):
         for i in range(len(CFunctionList)):
             result = CFunctionList[i]
             code_fragments.append(result)
 
     print("Code Fragments: ", code_fragments)
+    print("==============================================================")
     return code_fragments
 
 
+# 输出结果
 def printResult(filepath, code_fragments):
-    # 将结果 node_feature_list 和 edge_list 输入到相应的文件中
     base = filepath.split('/')[-1]
 
     f_code = open(filepath, 'a')
@@ -121,6 +124,7 @@ def printResult(filepath, code_fragments):
     f_code.close()
 
 
+# 将结果输入到 csv 文件中
 def write2csv(contract_csv, filepath):
     f_code = open(filepath, 'r')
     lines = f_code.readlines()
@@ -136,23 +140,12 @@ def write2csv(contract_csv, filepath):
 
 
 if __name__ == "__main__":
-    # test_contract = "../SmartContractDataSet/smart_contract_with_callvalue/22902.sol"
-    # find_location(test_contract)
+    test = "./smart_contract_with_callvalue/22902.sol"
+    find_location(test)
 
-    result = "../SmartContractDataSet/code_fragment1/"
-    contract_csv = "../SmartContractDataSet/code_fragment_csv/contract_csv.csv"
-    out = open(contract_csv, 'a', newline='')
-    csv_write = csv.writer(out, dialect='excel')
-    csv_write.writerow(['id', 'sequence_text', 'reentrancy', 'noreentrancy'])
-
-    dirs = os.listdir("../SmartContractDataSet/train_data_formatted_fragment1")
-    print(len(dirs))
-
-    for file in dirs:
-        print('./SmartContractDataSet/train_data_formatted_fragment1/' + file)
-        code_fragments = find_location('../SmartContractDataSet/train_data_formatted_fragment1/' + file)
-        printResult(result + file, code_fragments)
-
-    dir = os.listdir("../SmartContractDataSet/code_fragment1")
-    for file in dir:
-        write2csv(contract_csv, result + file)
+    # result = "./code_fragment_with_callvalue/"
+    # dirs = os.listdir("./smart_contract_with_callvalue")
+    #
+    # for file in dirs:
+    #     code_fragments = find_location('./smart_contract_with_callvalue/' + file)
+    #     printResult(result + file, code_fragments)

@@ -12,8 +12,10 @@ keywords = frozenset(
      'private', 'onlyOwner', 'internal', 'onlyGovernor', 'onlyCommittee', 'onlyAdmin', 'onlyPlayers', 'ownerExists',
      'onlyManager', 'onlyHuman', 'only_owner', 'onlyCongressMembers', 'preventReentry', 'noEther', 'onlyMembers',
      'onlyProxyOwner', 'confirmed'})
+
 # holds known non-user-defined functions; immutable set
-main_set = frozenset({'function', 'constructor'})
+main_set = frozenset({'function', 'constructor', 'modifier'})
+
 # arguments in main function; immutable set
 main_args = frozenset({'argc', 'argv'})
 
@@ -53,7 +55,7 @@ def clean_fragment(fragment):
             user_fun = rx_fun.findall(ascii_line)
             user_var = rx_var.findall(ascii_line)
 
-            # Could easily make a "clean gadget" type class to prevent duplicate functionality
+            # Could easily make a "clean fragment" type class to prevent duplicate functionality
             # of creating/comparing symbol names for functions and variables in much the same way.
             # The comparison frozenset, symbol dictionaries, and counters would be class scope.
             # So would only need to pass a string list and a string literal for symbol names to
