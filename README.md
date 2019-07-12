@@ -66,7 +66,7 @@ Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidi
 * Find the function where call.value is in the contract and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
 
-<div align=center><img width="800" height="420" src="./figs/code_fragment.png"/></div>
+<div align=center><img width="850" height="400" src="./figs/code_fragment.png"/></div>
 
 All of the smart contracts dataset in these folders in the following structure respectively.
 ```shell
@@ -103,7 +103,7 @@ We have implemented a function that automatically extracts code fragments and pr
 
 **BLSTM**
 
-**LSTM_Attention**
+**BLSTM+Attention**
 
 Implementation is very basic without much optimization, so that it is easier to debug and play around with the code.
 ```shell
