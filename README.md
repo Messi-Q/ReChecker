@@ -157,7 +157,7 @@ The performance evaluation of the model is shown in the following table. We also
 | GRU | 75.95 | 23.08 | 25.00 | 75.00 | 76.92 | 75.95 |
 | LSTM | 73.42 | 47.50 | 5.13 | 94.87 | 66.07 | 77.89 |
 | BLSTM | 73.42 | 46.15 | 7.50 | 92.50 | 67.27 | 77.89 |
-| LSTM_Attention | 69.62 | 46.15 | 15.00 | 85.00 | 65.38 | 73.91 |
+| LSTM+Attention | 69.62 | 46.15 | 15.00 | 85.00 | 65.38 | 73.91 |
 
 These results were obtained by running:
 
