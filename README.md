@@ -63,6 +63,9 @@ The following is an example of a smart contract reentrancy:
 
 ![Reentrancy_example](figs/reentrancy_example.png)
 
+This attack can occur when a contract sends an ether to an unknown address. An attacker can build a contract at an external address 
+that contains malicious code in the fallback function. Therefore, when the contract sends the Ether to this address, the malicious code will be activated.
+
 Therefore, in the current severe security contract vulnerability, an effective smart contract vulnerability detection tool 
 is urgently needed to detect contract-related vulnerabilities. It is very necessary and useful to design and implement 
 a smart contract security vulnerability detection device. 
