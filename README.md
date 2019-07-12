@@ -21,8 +21,9 @@ pip install scikit-learn
 ```
 
 ### Required Dataset
-This repository contains all necessary for the smart contract dataset. For the dataset, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities.
-Note: crawler tool is available [here](https://github.com/Messi-Q/Crawler).
+This repository contains all necessary for the smart contract dataset. For the dataset, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities.We provide some smart contract dataset in `train_data_formatted_fragment`.
+
+**Note:** crawler tool is available [here](https://github.com/Messi-Q/Crawler).
 
 ## Overview
 
@@ -132,6 +133,69 @@ python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 * All functions in the smart contract code are automatically split and stored.
 * Find the function where call.value is located and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
+
+**Note:** If you use the automation tool for generating code fragment, you need to normalize your smart contract code. Such as:
+1. The function name, parameters, and return value are on one line.
+```shell
+ function div(uint256 _a, uint256 _b) internal pure returns (uint256) {
+```
+2. Remove irrelevant information from the contract, such as comments.
+3. There are as few empty lines as possible between statements, and it is best to stick them between statements.
+bad example:
+```
+function transfer(address _to, uint _value, 
+         bytes _data, string _custom_fallback) 
+         public returns (bool success) {
+         
+        require(_value > 0 && frozenAccount[msg.sender] == false 
+        && frozenAccount[_to] == false 
+        && now > unlockUnixTime[msg.sender] 
+        && now > unlockUnixTime[_to]);
+
+        if (isContract(_to)) {
+        
+            require(balanceOf[msg.sender] >= _value);
+            balanceOf[msg.sender] = balanceOf[msg.sender].sub(_value);
+            
+            
+            
+            balanceOf[_to] = balanceOf[_to].add(_value);
+            assert(_to.call.value(0)(bytes4(keccak256(_custom_fallback)), msg.sender, _value, _data));
+            Transfer(msg.sender, _to, _value, _data);
+            
+            
+            
+            Transfer(msg.sender, _to, _value);
+            return true;
+            
+        } else {
+        
+            return transferToAddress(_to, _value, _data);
+        }
+    }
+```
+
+good example:
+```
+function transfer(address _to, uint _value, bytes _data, string _custom_fallback) public returns (bool success) {
+        require(_value > 0 && frozenAccount[msg.sender] == false 
+        && frozenAccount[_to] == false 
+        && now > unlockUnixTime[msg.sender] 
+        && now > unlockUnixTime[_to]);
+
+        if (isContract(_to)) {
+            require(balanceOf[msg.sender] >= _value);
+            balanceOf[msg.sender] = balanceOf[msg.sender].sub(_value);
+            balanceOf[_to] = balanceOf[_to].add(_value);
+            assert(_to.call.value(0)(bytes4(keccak256(_custom_fallback)), msg.sender, _value, _data));
+            Transfer(msg.sender, _to, _value, _data);
+            Transfer(msg.sender, _to, _value);
+            return true;
+        } else {
+            return transferToAddress(_to, _value, _data);
+        }
+    }
+```
 
 ### Running project
 * To run program, use this command: python SmConVulDetector.py --dataset [code_fragment_file], where code_fragment_file is one of the text files containing a fragment set.
