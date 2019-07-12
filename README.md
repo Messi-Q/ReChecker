@@ -56,10 +56,17 @@ At present, the attacker mainly implements reentrancy through the characteristic
 
 ![Reentrancy](figs/reentrancy.png)
 
-Reentrancy vulnerabilities have led to the loss of millions of dollars in The DAO attacks. 
+Reentrancy vulnerabilities have led to the loss of millions of dollars in The DAO attacks, 
+which eventually leads to the hard fork of Ethereum.
+
+The following is an example of a smart contract reentrancy:
+
+![Reentrancy_example](figs/reentrancy_example.png)
+
 Therefore, in the current severe security contract vulnerability, an effective smart contract vulnerability detection tool 
 is urgently needed to detect contract-related vulnerabilities. It is very necessary and useful to design and implement 
 a smart contract security vulnerability detection device. 
+
 
 ### Data
 Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidity programs). In total, 
