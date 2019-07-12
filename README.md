@@ -1,10 +1,6 @@
 # VulDeeSmartContract ![GitHub stars](https://img.shields.io/github/stars/Messi-Q/VulDeeSmartContract.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/Messi-Q/VulDeeSmartContract.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/Messi-Q/VulDeeSmartContract.svg?color=blue&style=plastic)
 
-&emsp;&emsp;This package is a python implementation of smart contract vulnerability detection based on deep learning. In previous studies,
-[VulDeePecker](https://arxiv.org/abs/1801.01681) is a design and implementation of a deep learning-based vulnerability detection system. Moreover, they present the first vulnerability dataset for deep learning approaches. 
-The datasets of [CWE-119](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-119) and [CWE-399](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-399) can be obtained [here](https://github.com/CGCL-codes/VulDeePecker).
-In our study, we refer to the idea of VulDeePecker to apply the deep learning to smart contract vulnerability detection. As a contribution, we offer the trainable smart contract dataset under the folder where the file name is data.
-It needs to be pointed out that at present we only detect the smart contract reentrancy vulnerability. 
+&emsp;This package is a python implementation of smart contract vulnerability detection based on deep learning. In previous studies, [VulDeePecker](https://arxiv.org/abs/1801.01681) is a design and implementation of a deep learning-based vulnerability detection system. Moreover, they present the first vulnerability dataset for deep learning approaches.  The datasets of [CWE-119](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-119) and [CWE-399](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-399) can be obtained [here](https://github.com/CGCL-codes/VulDeePecker). In our study, we refer to the idea of VulDeePecker to apply the deep learning to smart contract vulnerability detection. As a contribution, we offer the trainable smart contract dataset under the folder where the file name is data. It needs to be pointed out that at present we only detect the smart contract reentrancy vulnerability. 
 
 ## Requirements
 
@@ -25,9 +21,7 @@ pip install scikit-learn
 ```
 
 ### Required Dataset
-This repository contains all necessary for the smart contract dataset. For the dataset, we crawled the source code of 
-the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected 
-some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities.
+This repository contains all necessary for the smart contract dataset. For the dataset, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities.
 Note: crawler tool is available [here](https://github.com/Messi-Q/Crawler).
 
 ## Overview
@@ -42,45 +36,37 @@ So far, we have completed the following work:
 * Provides the trainable smart contract code fragment dataset.
 
 ### Reentrancy
-**Reentrancy vulnerability:** When an attacker initiates a transfer operation to a contract address, 
-it will force the execution of the fallback function of the attack contract itself. 
-The fallback function then contains the callback's own code, which causes the code to "re-enter" the contract.
+**Reentrancy vulnerability:** When an attacker initiates a transfer operation to a contract address, it will force the execution of the fallback function of the attack contract itself. The fallback function then contains the callback's own code, which causes the code to "re-enter" the contract.
 **Smart contract fallback function:**  
-* If a contract is called, there is no match for any of the functions. 
-Then, the default fallback function is called.
+* If a contract is called, there is no match for any of the functions. Then, the default fallback function is called.
 * This function is also executed when a contract receives ether (without any other data).
 
 At present, the attacker mainly implements reentrancy through the characteristics of the Ethereum smart contract call.value function. Its characteristics include:
 * When the execution fails, all the gas is consumed.
 * It cannot safely prevent reentry attacks.
 
-![Reentrancy](figs/reentrancy.png)
+<div align=center><img width="400" height="380" src="./figs/reentrancy.png"/></div>
 
-Reentrancy vulnerabilities have led to the loss of millions of dollars in The DAO attacks, 
-which eventually leads to the hard fork of Ethereum.
+Reentrancy vulnerabilities have led to the loss of millions of dollars in The DAO attacks, which eventually leads to the hard fork of Ethereum.
 
 The following is an example of a smart contract reentrancy:
 
-![Reentrancy_example](figs/reentrancy_example.png)
+<div align=center><img width="500" height="200" src="./figs/reentrancy_example.png"/></div>
 
-This attack can occur when a contract sends an ether to an unknown address. An attacker can build a contract at an external address 
-that contains malicious code in the fallback function. Therefore, when the contract sends the Ether to this address, the malicious code will be activated.
+This attack can occur when a contract sends an ether to an unknown address. An attacker can build a contract at an external address that contains malicious code in the fallback function. Therefore, when the contract sends the Ether to this address, the malicious code will be activated.
 
-Therefore, in the current severe security contract vulnerability, an effective smart contract vulnerability detection tool 
-is urgently needed to detect contract-related vulnerabilities. It is very necessary and useful to design and implement 
-a smart contract security vulnerability detection device. 
+Therefore, in the current severe security contract vulnerability, an effective smart contract vulnerability detection tool is urgently needed to detect contract-related vulnerabilities. It is very necessary and useful to design and implement a smart contract security vulnerability detection device. 
 
 
 ### Data
-Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidity programs). In total, 
-the Code Fragment database contains 1470 code fragments, including 197 code gadgets that are vulnerable and 1273 code gadgets that are not vulnerable. 
-Due to the limited number of smart contracts on Ethereum, we reused some smart contracts.
+Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidity programs). In total, the Code Fragment database contains 1470 code fragments, including 197 code gadgets that are vulnerable and 1273 code gadgets that are not vulnerable. Due to the limited number of smart contracts on Ethereum, we reused some smart contracts.
 
 #### How to construct the code fragment?
 * Remove all comments from the solidity source code. Remove comment tool available [here](https://github.com/Messi-Q/Automation-Tools/blob/master/delete_comment_official.py)
 * Find the function where call.value is in the contract and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
-![code fragment](figs/code_fragment.png)
+
+<div align=center><img width="800" height="420" src="./figs/code_fragment.png"/></div>
 
 All of the smart contracts dataset in these folders in the following structure respectively.
 ```shell
@@ -111,7 +97,7 @@ We have implemented a function that automatically extracts code fragments and pr
 
 **LSTM** 
 
-![LSTM](figs/LSTM.png)
+<div align=center><img width="550" height="400" src="./figs/LSTM.png"/></div>
 
 **GRU** 
 
@@ -164,8 +150,7 @@ for i in $(seq 1 5); do python SmConVulDetector.py --model BLSTM | tee logs/smar
 Then, you can find the training results in the `logs`.
 
 ## Results
-The performance evaluation of the model is shown in the following table. We also repeat experiments 10 times to calculate the average.
-The performance evaluation results on the `SmartContractFull.txt` dataset are given below. 
+The performance evaluation of the model is shown in the following table. We also repeat experiments 10 times to calculate the average. The performance evaluation results on the `SmartContractFull.txt` dataset are given below. 
 
 | Model | Accuracy | False positive rate(FP) | False negative rate(FN) | Recall | Precision | F1 score |
 | ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- |  ------------- |
@@ -183,9 +168,7 @@ These results were obtained by running:
 ## Other
 
 **basic**
-For this, we try to use the word segmentation method to train smart contract dataset. 
-In addition, we used the library of `torchtext` to experiment. The specific experimental process is referenced [here](https://github.com/keitakurita/practical-torchtext). 
-We experimented with our own dataset(smart contract code fragment).
+For this, we try to use the word segmentation method to train smart contract dataset. In addition, we used the library of `torchtext` to experiment. The specific experimental process is referenced [here](https://github.com/keitakurita/practical-torchtext). We experimented with our own dataset(smart contract code fragment).
 You can install torchtext by:
 ```shell
 pip install torchtext
