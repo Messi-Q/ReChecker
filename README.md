@@ -66,7 +66,7 @@ Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidi
 * Find the function where call.value is in the contract and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
 
-<div align=center><img width="800" height="420" src="./figs/code_fragment.png"/></div>
+<div align=center><img width="860" height="380" src="./figs/code_fragment.png"/></div>
 
 All of the smart contracts dataset in these folders in the following structure respectively.
 ```shell
@@ -103,13 +103,13 @@ We have implemented a function that automatically extracts code fragments and pr
 
 **BLSTM**
 
-**LSTM_Attention**
+**BLSTM+Attention**
 
 Implementation is very basic without much optimization, so that it is easier to debug and play around with the code.
 ```shell
-python SmConVulDetector.py --model BLSTM  # to run BLSTM
 python SmConVulDetector.py --model LSTM_Model  # to run LSTM
 python SmConVulDetector.py --model GRU_Model  # to run GRU
+python SmConVulDetector.py --model BLSTM  # to run BLSTM
 python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 ```
 
@@ -138,32 +138,31 @@ python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 Examples:
 ```shell
 python SmConVulDetector.py --dataset data/SmartContract.txt
-python SmConVulDetector.py --dataset data/SmartContract.txt --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 20 --batch_size 32
+python SmConVulDetector.py --dataset data/SmartContract.txt --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10 --batch_size 32
 ```
 
 Using script：
-Repeating 5 times with `train.sh`.
+Repeating 10 times with `train.sh`.
 ```shell
-for i in $(seq 1 5); do python SmConVulDetector.py --model BLSTM | tee logs/smartcheck_"$i".log; done
+for i in $(seq 1 10); do python SmConVulDetector.py --model BLSTM | tee logs/smartcheck_"$i".log; done
 ./train.sh
 ```
 Then, you can find the training results in the `logs`.
 
 ## Results
-The performance evaluation of the model is shown in the following table. We also repeat experiments 10 times to calculate the average. The performance evaluation results on the `SmartContractFull.txt` dataset are given below. 
+The performance evaluation of the model is shown in the following table. We also repeat experiments 10 times to calculate the average. The performance evaluation results on the `SmartContract.txt` dataset are given below. 
 
-| Model | Accuracy | False positive rate(FP) | False negative rate(FN) | Recall | Precision | F1 score |
+| Model | Accuracy(%) | False positive rate(FP)(%) | False negative rate(FN)(%) | Recall(%) | Precision(%) | F1 score(%) |
 | ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- |  ------------- |
 | GRU | 75.95 | 23.08 | 25.00 | 75.00 | 76.92 | 75.95 |
 | LSTM | 73.42 | 47.50 | 5.13 | 94.87 | 66.07 | 77.89 |
 | BLSTM | 73.42 | 46.15 | 7.50 | 92.50 | 67.27 | 77.89 |
-| LSTM_Attention | 69.62 | 46.15 | 15.00 | 85.00 | 65.38 | 73.91 |
+| BLSTM+Attention | 69.62 | 46.15 | 15.00 | 85.00 | 65.38 | 73.91 |
 
 These results were obtained by running:
 
-`python SmConVulDetector.py -D data/SmartContractFull.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 5
+`python SmConVulDetector.py -D data/SmartContractFull.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10
 `
-* TODO: At present, Not yet given ten averages and standard deviations
 
 ## Other
 
