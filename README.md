@@ -5,7 +5,7 @@ This package is a python implementation of smart contract vulnerability detectio
 ## Requirements
 
 #### Required Packages
-* **python** 3.7
+* **python**3
 * **TensorFlow** 1.13
 * **keras** 2.2.4 with TensorFlow backend
 * **pandas** for data reading and writing
