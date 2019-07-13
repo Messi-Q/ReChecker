@@ -230,10 +230,10 @@ These results were obtained by running:
 `python SmConVulDetector.py -D data/SmartContractFull.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10
 `
 
-## Other
+## Other(basic)
 
-**basic**
 For this, we try to use the word segmentation method to train smart contract dataset. In addition, we used the library of `torchtext` to experiment. The specific experimental process is referenced [here](https://github.com/keitakurita/practical-torchtext). We experimented with our own dataset(smart contract code fragment).
+
 You can install torchtext by:
 ```shell
 pip install torchtext
