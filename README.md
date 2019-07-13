@@ -102,11 +102,11 @@ We have implemented a function that automatically extracts code fragments and pr
 
 **BLSTM**: Bidirectional LSTM consists of two LSTMs stacked one on top of the other. The output is determined by the state of the hidden layers of the two LSTMs.
 
-<div align=center><img width="500" height="480" src="./figs/blstm.png"/></div>
+<div align=center><img width="500" height="420" src="./figs/blstm.png"/></div>
 
 **BLSTM+Attention**: The Attention mechanism is implemented by preserving the LSTM encoder's intermediate output to the input sequence, then training a model to selectively learn these inputs and correlating the output sequences with the model output.
 
-<div align=center><img width="500" height="520" src="./figs/blstm+attention.png"/></div>
+<div align=center><img width="500" height="430" src="./figs/blstm+attention.png"/></div>
 
 In our experiment, all hyperparameters are the same for the baseline LSTM, GRU, BLSTM and BLSTM+Attention, which hyperparameters from `parser.py` are used.
 
