@@ -1,15 +1,16 @@
 # VulDeeSmartContract ![GitHub stars](https://img.shields.io/github/stars/Messi-Q/VulDeeSmartContract.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/Messi-Q/VulDeeSmartContract.svg?color=blue&style=plastic) ![License](https://img.shields.io/github/license/Messi-Q/VulDeeSmartContract.svg?color=blue&style=plastic)
 
-&emsp;This package is a python implementation of smart contract vulnerability detection based on deep learning. In previous studies, [VulDeePecker](https://arxiv.org/abs/1801.01681) is a design and implementation of a deep learning-based vulnerability detection system. Moreover, they present the first vulnerability dataset for deep learning approaches.  The datasets of [CWE-119](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-119) and [CWE-399](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-399) can be obtained [here](https://github.com/CGCL-codes/VulDeePecker). In our study, we refer to the idea of VulDeePecker to apply the deep learning to smart contract vulnerability detection. As a contribution, we offer the trainable smart contract dataset under the folder where the file name is data. It needs to be pointed out that at present we only detect the smart contract reentrancy vulnerability. 
+This package is a python implementation of smart contract vulnerability detection based on deep learning. In previous studies, [VulDeePecker](https://arxiv.org/abs/1801.01681) is a design and implementation of a deep learning-based vulnerability detection system. Moreover, they present the first vulnerability dataset for deep learning approaches.  The datasets of [CWE-119](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-119) and [CWE-399](https://github.com/CGCL-codes/VulDeePecker/tree/master/CWE-399) can be obtained [here](https://github.com/CGCL-codes/VulDeePecker). In our study, we refer to the idea of VulDeePecker to apply the deep learning to smart contract vulnerability detection. As a contribution, we offer the trainable smart contract dataset under the folder where the file name is data. It needs to be pointed out that at present we only detect the smart contract reentrancy vulnerability. 
 
 ## Requirements
 
 #### Required Packages
-* **python** 3.7
+* **python**3
 * **TensorFlow** 1.13
 * **keras** 2.2.4 with TensorFlow backend
 * **pandas** for data reading and writing
 * **sklearn** for model evaluation
+* **gensim** for word2vec
 
 Run the following script to install the required packages.
 ```shell
@@ -18,6 +19,7 @@ pip install --upgrade tensorflow
 pip install keras
 pip install pandas
 pip install scikit-learn
+pip install gensim
 ```
 
 ### Required Dataset
@@ -37,8 +39,11 @@ So far, we have completed the following work:
 * Provides the trainable smart contract code fragment dataset.
 
 ### Reentrancy
-**Reentrancy vulnerability:** When an attacker initiates a transfer operation to a contract address, it will force the execution of the fallback function of the attack contract itself. The fallback function then contains the callback's own code, which causes the code to "re-enter" the contract.
-**Smart contract fallback function:**  
+**Reentrancy vulnerability** 
+
+When an attacker initiates a transfer operation to a contract address, it will force the execution of the fallback function of the attack contract itself. The fallback function then contains the callback's own code, which causes the code to "re-enter" the contract.
+
+**Smart contract fallback function**  
 * If a contract is called, there is no match for any of the functions. Then, the default fallback function is called.
 * This function is also executed when a contract receives ether (without any other data).
 
@@ -67,7 +72,7 @@ Code Fragment focuses on the reentrancy vulnerabilities in smart contract(solidi
 * Find the function where call.value is in the contract and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
 
-<div align=center><img width="860" height="380" src="./figs/code_fragment.png"/></div>
+<div align=center><img width="700" height="310" src="./figs/code_fragment.png"/></div>
 
 All of the smart contracts dataset in these folders in the following structure respectively.
 ```shell
@@ -96,17 +101,17 @@ We have implemented a function that automatically extracts code fragments and pr
 
 ### Models
 
-**LSTM**: The baseline model is Long Short Term Memory (LSTM). Long Short Term is a special type of RNN that learns long-term dependency information. LSTM avoids long-term dependencies by deliberate design. Remember that long-term information is the default behavior of LSTM in practice, not the ability to get it at a great price. 
+**LSTM** The baseline model is Long Short Term Memory (LSTM). Long Short Term is a special type of RNN that learns long-term dependency information. LSTM avoids long-term dependencies by deliberate design. Remember that long-term information is the default behavior of LSTM in practice, not the ability to get it at a great price. 
 
-**GRU**: Gated Recurrent Unit (GRU) is a variant of LSTM. On the one hand, GRUs have fewer parameters, so training is slightly faster or requires less data to generalize. On the other hand, if there is enough data, the powerful expressive power of LSTM may produce better results.
+**GRU** Gated Recurrent Unit (GRU) is a variant of LSTM. On the one hand, GRUs have fewer parameters, so training is slightly faster or requires less data to generalize. On the other hand, if there is enough data, the powerful expressive power of LSTM may produce better results.
 
-**BLSTM**: Bidirectional LSTM consists of two LSTMs stacked one on top of the other. The output is determined by the state of the hidden layers of the two LSTMs.
+**BLSTM** Bidirectional LSTM consists of two LSTMs stacked one on top of the other. The output is determined by the state of the hidden layers of the two LSTMs.
 
-<div align=center><img width="500" height="480" src="./figs/blstm.png"/></div>
+<div align=center><img width="500" height="420" src="./figs/blstm.png"/></div>
 
-**BLSTM+Attention**: The Attention mechanism is implemented by preserving the LSTM encoder's intermediate output to the input sequence, then training a model to selectively learn these inputs and correlating the output sequences with the model output.
+**BLSTM+Attention** The Attention mechanism is implemented by preserving the LSTM encoder's intermediate output to the input sequence, then training a model to selectively learn these inputs and correlating the output sequences with the model output.
 
-<div align=center><img width="500" height="520" src="./figs/blstm+attention.png"/></div>
+<div align=center><img width="500" height="420" src="./figs/blstm+attention.png"/></div>
 
 In our experiment, all hyperparameters are the same for the baseline LSTM, GRU, BLSTM and BLSTM+Attention, which hyperparameters from `parser.py` are used.
 
@@ -180,10 +185,7 @@ function transfer(address _to, uint _value,
 good example:
 ```
 function transfer(address _to, uint _value, bytes _data, string _custom_fallback) public returns (bool success) {
-        require(_value > 0 && frozenAccount[msg.sender] == false 
-        && frozenAccount[_to] == false 
-        && now > unlockUnixTime[msg.sender] 
-        && now > unlockUnixTime[_to]);
+        require(_value > 0 && frozenAccount[msg.sender] == false && frozenAccount[_to] == false && now > unlockUnixTime[msg.sender] && now > unlockUnixTime[_to]);
 
         if (isContract(_to)) {
             require(balanceOf[msg.sender] >= _value);
@@ -229,7 +231,7 @@ The performance evaluation of the model is shown in the following table. We also
 
 These results were obtained by running:
 
-`python SmConVulDetector.py -D data/SmartContractFull.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10
+`python SmConVulDetector.py -D data/SmartContract.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10
 `
 
 ## Other(basic)
