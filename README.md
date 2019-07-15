@@ -234,6 +234,17 @@ These results were obtained by running:
 `python SmConVulDetector.py -D data/SmartContract.txt --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10
 `
 
+In addition, we compare the deep contract-based smart contract detection tool with the existing smart contract vulnerability detection tools. We still compare the test results of different tools from Accuracy, Precision, Recall, and F1-Score. The performance comparison results of the smart contract vulnerability detection tool are shown in the following table.
+
+| Model | Accuracy(%) | False positive rate(FP)(%) | False negative rate(FN)(%) | Recall(%) | Precision(%) | F1 score(%) |
+| ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- |  ------------- |
+| SmartCheck | 54.05 | **30.25** | **74.24** | 25.76 | 32.08 | 28.57 |
+| Securify | 64.86 | 4.11 | 55.36 | 44.64 | 94.34 | 60.61 |
+| BLSTM | 85.00 | 19.07 | 10.93 | **89.07** | 83.24 | 85.57 |
+| BLSTM+Attention | **85.69** | 17.21 | **11.40** | 88.60 | **84.82** | **86.26** |
+
+As can be seen from the above table, SmartCheck has a high false positive rate and false negative rate, the effect is not good, the relatively good Securify's false negative rate has reached 55.36%, but its false positive rate is the lowest, only 4.11%. In contrast, the deep learning-based approach (BLSTM, BLSTM + Attention) has lower false positives and false negatives, and its accuracy rate has reached more than 85%.
+
 ## Other(basic)
 
 For this, we try to use the word segmentation method to train smart contract dataset. In addition, we used the library of `torchtext` to experiment. The specific experimental process is referenced [here](https://github.com/keitakurita/practical-torchtext). We experimented with our own dataset(smart contract code fragment).
