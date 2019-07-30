@@ -7,7 +7,7 @@ This package is a python implementation of smart contract vulnerability detectio
 #### Required Packages
 * **python**3
 * **TensorFlow** 1.13
-* **keras** 2.2.4 with TensorFlow backend
+* **keras** 2.2.4 with TensorFlow   backend
 * **pandas** for data reading and writing
 * **sklearn** for model evaluation
 * **gensim** for word2vec
@@ -23,7 +23,7 @@ pip install gensim
 ```
 
 ### Required Dataset
-This repository contains all necessary for the smart contract dataset. For the dataset, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities. Smart contracts source code are available in `smart_contract_with_callvalue/without_callvalue`.
+This repository contains the smart contract dataset of source code and processed code fragment. As to the source code, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. In addition, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities. Smart contracts source code are available in `smart_contract_with_callvalue/without_callvalue`.
 
 **Note:** crawler tool is available [here](https://github.com/Messi-Q/Crawler).
 

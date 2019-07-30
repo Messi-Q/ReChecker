@@ -23,6 +23,8 @@ ground_truth = [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0
 
 tn, fp, fn, tp = confusion_matrix(securify, ground_truth).ravel()
 
+print(tn, fp, fn, tp)
+
 print('Accuracy:', (tn + tp) / (tn + fp + fn + tp))
 print('False positive rate(FP): ', fp / (fp + tn))
 print('False negative rate(FN): ', fn / (fn + tp))
