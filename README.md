@@ -34,7 +34,7 @@ So far, we have completed the following work:
 * Uses N-grams and deep learning network to train detection model, include GRU, LSTM, BLSTM, and LSTM-Attention.
 * Implemented a tool to automatically construct smart contract code fragments.
   * Find the semantic-related code with the key function call.value.
-  * Code gadgets are vectorized for input to neural network.
+  * Code gadgets are vectorized for input to the neural network.
 * Trained in the reentrancy vulnerability to detect exploitable code in solidity.
 * Provides the trainable smart contract code fragment dataset.
 
@@ -115,7 +115,7 @@ We have implemented a function that automatically extracts code fragments and pr
 
 In our experiment, all hyperparameters are the same for the baseline LSTM, GRU, BLSTM, and BLSTM+Attention, which hyperparameters from `parser.py` are used.
 
-Implementation is very basic without many optimizations, so that it is easier to debug and play around with the code.
+Implementation is very basic without many optimizations so that it is easier to debug and play around with the code.
 ```shell
 python SmConVulDetector.py --model LSTM_Model  # to run LSTM
 python SmConVulDetector.py --model GRU_Model  # to run GRU
@@ -127,7 +127,7 @@ python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 
 1. `SmConVulDetector.py`
 * Interface to project, uses functionality from other code files.
-* Fetches each gadget, cleans, buffers, trains Word2Vec model, vectorizes, passes to neural net.
+* Fetches each gadget, cleans, buffers, trains Word2Vec model, vectorizes, passes to the neural net.
 2. `clean_fragment.py`
 * For each gadget, replaces all user variables with "VAR#" and user functions with "FUN#".
 * Removes content from string and character literals.
@@ -243,18 +243,9 @@ Besides, we compare the deep contract-based smart contract detection tool with t
 | BLSTM | 85.00 | 19.07 | 10.93 | **89.07** | 83.24 | 85.57 |
 | BLSTM+Attention | **85.69** | 17.21 | **11.40** | 88.60 | **84.82** | **86.26** |
 
-As can be seen from the above table, SmartCheck has a high false-positive rate and false-negative rate, the effect is not good, the relatively good Securify's false negative rate has reached 55.36%, but its false-positive rate is the lowest, only 4.11%. In contrast, the deep learning-based approach (BLSTM, BLSTM + Attention) has lower false positives and false negatives, and its accuracy rate has reached more than 85%.
+As can be seen from the above table, SmartCheck has a high false-positive rate and false-negative rate, the effect is not good, the relatively good Securify's false-negative rate has reached 55.36%, but its false-positive rate is the lowest, only 4.11%. In contrast, the deep learning-based approach (BLSTM, BLSTM + Attention) has lower false positives and false negatives, and its accuracy rate has reached more than 85%.
 
-## Other(basic)
-
-For this, we try to use the word segmentation method to train smart contract dataset. Besides, we used the library of `torchtext` to experiment. The specific experimental process is referenced [here](https://github.com/keitakurita/practical-torchtext). We experimented with our dataset(smart contract code fragment).
-
-You can install torchtext by:
-```shell
-pip install torchtext
-```
 
 ## References
 1. Zhen Li, Deqing Zou, Shouhuai Xu, Xinyu Ou, Hai Jin, Sujuan Wang, Zhijun Deng, and Yuyi Zhong. [VulDeePecker: A Deep Learning-Based System for Vulnerability Detection](https://arxiv.org/abs/1801.01681).
 2. VulDeePecker algorithm implemented in Python. [VDPython](https://github.com/johnb110/VDPython).
-3. A set of tutorials for torchtext. [practical-torchtext](https://github.com/keitakurita/practical-torchtext).
