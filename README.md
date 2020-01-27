@@ -27,6 +27,9 @@ This repository contains the smart contract dataset of source code and processed
 
 **Note:** crawler tool is available [here](https://github.com/Messi-Q/Crawler).
 
+### dataset
+Ethereum smart contracts:  Etherscan_contract. [dataset](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
+
 ## Overview
 
 My attempt to detect smart contract reentrancy vulnerability. We apply deep learning to smart contract vulnerability detection.
