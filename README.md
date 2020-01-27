@@ -223,4 +223,3 @@ Then, you can find the training results in the `logs`.
 ## References
 1. Zhen Li, Deqing Zou, Shouhuai Xu, Xinyu Ou, Hai Jin, Sujuan Wang, Zhijun Deng, and Yuyi Zhong. [VulDeePecker: A Deep Learning-Based System for Vulnerability Detection](https://arxiv.org/abs/1801.01681).
 2. VulDeePecker algorithm implemented in Python. [VDPython](https://github.com/johnb110/VDPython).
-3. A set of tutorials for torchtext. [practical-torchtext](https://github.com/keitakurita/practical-torchtext).
