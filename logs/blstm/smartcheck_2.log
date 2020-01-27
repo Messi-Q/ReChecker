@@ -1,0 +1,19 @@
+dataset train_data/test_source_2000.txt
+model BLSTM
+lr 0.002
+dropout 0.2
+vector_dim 300
+epochs 20
+batch_size 64
+threshold 0.5
+
+ 64/210 [========>.....................] - ETA: 0s
+128/210 [=================>............] - ETA: 0s
+192/210 [==========================>...] - ETA: 0s
+210/210 [==============================] - 1s 4ms/step
+Accuracy:  0.5809523832230341
+False positive rate(FP):  0.14285714285714285
+False negative rate(FN):  0.6952380952380952
+Recall:  0.3047619047619048
+Precision:  0.6808510638297872
+F1 score:  0.4210526315789474

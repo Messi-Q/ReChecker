@@ -84,7 +84,7 @@ class FragmentVectorizer:
     @staticmethod
     def tokenize_fragment(fragment):
         tokenized = []
-        function_regex = re.compile('FUN(\d)+')
+        function_regex = re.compile('function(\d)+')
         backwards_slice = False
         for line in fragment:
             tokens = FragmentVectorizer.tokenize(line)
@@ -132,7 +132,7 @@ class FragmentVectorizer:
 
     def train_model(self):
         # Set min_count to 1 to prevent out-of-vocabulary errors
-        model = Word2Vec(self.fragments, min_count=1, size=self.vector_length, sg=1)
+        model = Word2Vec(self.fragments, min_count=1, size=self.vector_length, sg=0)  # sg=0: CBOW; sg=1: Skip-Gram
         self.embeddings = model.wv
         del model
         del self.fragments

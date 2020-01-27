@@ -6,13 +6,14 @@ from keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix
 from sklearn.utils import compute_class_weight
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, LSTM, Bidirectional, LeakyReLU
+from keras.layers import Dense, Dropout, LSTM, Bidirectional, ReLU
 from keras.optimizers import Adamax
 from keras.layers import Layer
 from keras import backend as K
 from keras import initializers, regularizers, constraints
 from sklearn.model_selection import train_test_split
 from parser import parameter_parser
+from models.loss_draw import LossHistory
 
 args = parameter_parser()
 
@@ -162,9 +163,11 @@ class BLSTM_Attention:
         negative_idxs = np.where(labels == 0)[0]
         undersampled_negative_idxs = np.random.choice(negative_idxs, len(positive_idxs), replace=False)
         resampled_idxs = np.concatenate([positive_idxs, undersampled_negative_idxs])
+        idxs = np.concatenate([positive_idxs, negative_idxs])
 
-        x_train, x_test, y_train, y_test = train_test_split(vectors[resampled_idxs], labels[resampled_idxs],
-                                                            test_size=0.2, stratify=labels[resampled_idxs])
+        x_train, x_test, y_train, y_test = train_test_split(vectors[idxs], labels[idxs],
+                                                            test_size=0.99, stratify=labels[idxs])
+
         self.x_train = x_train
         self.x_test = x_test
         self.y_train = to_categorical(y_train)
@@ -177,11 +180,10 @@ class BLSTM_Attention:
         model.add(Bidirectional(LSTM(300, return_sequences=True), input_shape=(vectors.shape[1], vectors.shape[2])))
         model.add(AttentionWithContext())
         model.add(Addition())
-        model.add(Dense(300))
-        model.add(LeakyReLU())
+        model.add(ReLU())
         model.add(Dropout(dropout))
         model.add(Dense(300))
-        model.add(LeakyReLU())
+        model.add(ReLU())
         model.add(Dropout(dropout))
         model.add(Dense(2, activation='softmax'))
         # Lower learning rate to prevent divergence
@@ -194,9 +196,11 @@ class BLSTM_Attention:
     """
 
     def train(self):
+        history = LossHistory()
         self.model.fit(self.x_train, self.y_train, batch_size=self.batch_size, epochs=self.epochs,
-                       class_weight=self.class_weight)
+                       class_weight=self.class_weight, verbose=1, callbacks=[history], validation_data=(self.x_test, self.y_test))
         self.model.save_weights(self.name + "_model.pkl")
+        history.loss_plot('epoch')
 
     """
     Tests accuracy of model
@@ -204,8 +208,8 @@ class BLSTM_Attention:
     """
 
     def test(self):
-        self.model.load_weights(self.name + "_model.pkl")
-        values = self.model.evaluate(self.x_test, self.y_test, batch_size=self.batch_size)
+        # self.model.load_weights("reentrancy_code_snippets_2000_model.pkl")
+        values = self.model.evaluate(self.x_test, self.y_test, batch_size=self.batch_size, verbose=1)
         print("Accuracy: ", values[1])
         predictions = (self.model.predict(self.x_test, batch_size=self.batch_size)).round()
 

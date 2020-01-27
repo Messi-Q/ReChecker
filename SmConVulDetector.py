@@ -5,7 +5,7 @@ from vectorize_fragment import FragmentVectorizer
 from models.blstm import BLSTM
 from models.blstm_attention import BLSTM_Attention
 from models.lstm import LSTM_Model
-from models.gru import GRU_Model
+from models.simple_rnn import Simple_RNN
 from parser import parameter_parser
 
 args = parameter_parser()
@@ -23,7 +23,7 @@ def parse_file(filename):
             if not stripped:
                 continue
             if "-" * 33 in line and fragment:
-                yield clean_fragment(fragment), fragment_val
+                yield fragment, fragment_val
                 fragment = []
             elif stripped.split()[0].isdigit():
                 if fragment:
@@ -37,16 +37,16 @@ def parse_file(filename):
 
 """
 Assuming all fragments can fit in memory, build list of fragment dictionaries
-    Dictionary contains fragments and vulnerability indicator
-    Add each fragment to fragmentVectorizer
+Dictionary contains fragments and vulnerability indicator
+Add each fragment to fragmentVectorizer
 Train fragmentVectorizer model, prepare for vectorization
 Loop again through list of fragments
-    Vectorize each fragment and put vector into new list
+Vectorize each fragment and put vector into new list
 Convert list of dictionaries to dataframe when all fragments are processed
 """
 
 
-def get_vectors_df(filename, vector_length=100):
+def get_vectors_df(filename, vector_length=300):
     fragments = []
     count = 0
     vectorizer = FragmentVectorizer(vector_length)
@@ -97,11 +97,11 @@ def main():
         model = BLSTM_Attention(df, name=base)
     elif args.model == 'BLSTM':
         model = BLSTM(df, name=base)
-    elif args.model == 'GRU_Model':
-        model = GRU_Model(df, name=base)
+    elif args.model == 'Simple_RNN':
+        model = Simple_RNN(df, name=base)
     elif args.model == 'LSTM_Model':
         model = LSTM_Model(df, name=base)
-    model.train()
+    # model.train()
     model.test()
 
 

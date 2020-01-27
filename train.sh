@@ -2,5 +2,5 @@
 
 for i in $(seq 1 10);
 do
-python SmConVulDetector.py --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10 | tee logs/smartcheck_"$i".log;
+python SmConVulDetector.py | tee logs/lstm/smartcheck_"$i".log;
 done

@@ -1,0 +1,19 @@
+dataset train_data/reentrancy_1671.txt
+model Simple_RNN
+lr 0.002
+dropout 0.2
+vector_dim 300
+epochs 10
+batch_size 64
+threshold 0.5
+
+ 64/231 [=======>......................] - ETA: 0s
+192/231 [=======================>......] - ETA: 0s
+231/231 [==============================] - 0s 1ms/step
+Accuracy:  0.5281385327830459
+Accuracy:  0.5281385281385281
+False positive rate(FPR):  0.5258620689655172
+False negative rate(FNR):  0.41739130434782606
+Recall(TPR):  0.5826086956521739
+Precision:  0.5234375
+F1 score:  0.551440329218107

@@ -6,7 +6,7 @@ from keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix
 from sklearn.utils import compute_class_weight
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, LSTM, Bidirectional, LeakyReLU
+from keras.layers import Dense, Dropout, LSTM, Bidirectional, ReLU
 from keras.optimizers import Adamax
 from sklearn.model_selection import train_test_split
 from parser import parameter_parser
@@ -41,14 +41,11 @@ class BLSTM:
         self.class_weight = compute_class_weight(class_weight='balanced', classes=[0, 1], y=labels)
         model = Sequential()
         model.add(Bidirectional(LSTM(300), input_shape=(vectors.shape[1], vectors.shape[2])))
-        model.add(Dense(300))
-        model.add(LeakyReLU())
-        model.add(Dropout(dropout))
-        model.add(Dense(300))
-        model.add(LeakyReLU())
+        model.add(ReLU())
         model.add(Dropout(dropout))
         model.add(Dense(2, activation='softmax'))
         # Lower learning rate to prevent divergence
+
         adamax = Adamax(lr)
         model.compile(adamax, 'categorical_crossentropy', metrics=['accuracy'])
         self.model = model
@@ -58,9 +55,10 @@ class BLSTM:
     """
 
     def train(self):
+        # 创建一个实例history
         self.model.fit(self.x_train, self.y_train, batch_size=self.batch_size, epochs=self.epochs,
                        class_weight=self.class_weight)
-        self.model.save_weights(self.name + "_model.pkl")
+        # self.model.save_weights(self.name + "_model.pkl")
 
     """
     Tests accuracy of model
@@ -68,7 +66,7 @@ class BLSTM:
     """
 
     def test(self):
-        self.model.load_weights(self.name + "_model.pkl")
+        # self.model.load_weights(self.name + "_model.pkl")
         values = self.model.evaluate(self.x_test, self.y_test, batch_size=self.batch_size)
         print("Accuracy: ", values[1])
         predictions = (self.model.predict(self.x_test, batch_size=self.batch_size)).round()

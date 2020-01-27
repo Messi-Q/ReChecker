@@ -2,10 +2,6 @@ import os
 import re
 import csv
 
-"""
-W 函数：调用 call.value 的函数   C 函数：调用 W 函数的函数
-"""
-
 
 # 函数分割
 def split_function(filepath):
@@ -140,12 +136,12 @@ def write2csv(contract_csv, filepath):
 
 
 if __name__ == "__main__":
-    test = "./smart_contract_with_callvalue/22902.sol"
-    find_location(test)
+    # test = "./contracts/reentrancy/smart_contract_200/22902.sol"
+    # find_location(test)
 
-    # result = "./code_fragment_with_callvalue/"
-    # dirs = os.listdir("./smart_contract_with_callvalue")
-    #
-    # for file in dirs:
-    #     code_fragments = find_location('./smart_contract_with_callvalue/' + file)
-    #     printResult(result + file, code_fragments)
+    result = "./contracts/reentrancy/code_snippets_200/"
+    dirs = os.listdir("./contracts/reentrancy/smart_contract_200/")
+
+    for file in dirs:
+        code_fragments = find_location('./contracts/reentrancy/smart_contract_200/' + file)
+        printResult(result + file, code_fragments)
