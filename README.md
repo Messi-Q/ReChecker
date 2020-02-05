@@ -212,16 +212,11 @@ Then, you can find the training results in the `logs`.
 
 ## References
 ```
-@ARTICLE{8970384,
-author={P. {Qian} and Z. {Liu} and Q. {He} and R. {Zimmermann} and X. {Wang}},
-journal={IEEE Access},
-title={Towards Automated Reentrancy Detection for Smart Contracts Based on Sequential Models},
-year={2020},
-volume={8},
-number={},
-pages={19685-19695},
-keywords={Blockchain;smart contract;deep learning;sequential models;vulnerability detection},
-doi={10.1109/ACCESS.2020.2969429},
-ISSN={2169-3536},
-month={},}
+@article{qian2020towards,
+  title={Towards Automated Reentrancy Detection for Smart Contracts Based on Sequential Models},
+  author={Qian, Peng and Liu, Zhenguang and He, Qinming and Zimmermann, Roger and Wang, Xun},
+  journal={IEEE Access},
+  year={2020},
+  publisher={IEEE}
+}
 ```
