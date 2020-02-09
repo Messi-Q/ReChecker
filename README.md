@@ -27,8 +27,9 @@ This repository contains the smart contract dataset of source code and processed
 
 **Note:** crawler tool is available [here](https://github.com/Messi-Q/Crawler).
 
-### dataset
-Ethereum smart contracts:  Etherscan_contract. [dataset](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
+### Dataset
+Ethereum smart contracts:  [Etherscan_contract](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
+
 
 ## Overview
 
