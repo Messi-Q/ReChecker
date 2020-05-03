@@ -7,7 +7,7 @@ This package is a python implementation of smart contract vulnerability detectio
 #### Required Packages
 * **python**3
 * **TensorFlow** 1.13
-* **keras** 2.2.4 with TensorFlow   backend
+* **keras** 2.2.4 with TensorFlow backend
 * **pandas** for data reading and writing
 * **sklearn** for model evaluation
 * **gensim** for word2vec
@@ -23,7 +23,7 @@ pip install gensim
 ```
 
 ### Required Dataset
-This repository contains the smart contract dataset of source code and processed code fragment. As to the source code, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. Besides, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities. Smart contracts source code are available in `smart_contract_with_callvalue/without_callvalue`.
+This repository contains the smart contract dataset of source code and processed code fragment. As to the source code, we crawled the source code of the smart contract from the [Ethereum](https://etherscan.io/) by using the crawler tool. Besides, we have collected some data from some other websites. At the same time, we also designed and wrote some smart contract codes with reentrancy vulnerabilities. 
 
 **Note:** crawler tool is available [here](https://github.com/Messi-Q/Crawler).
 
@@ -70,7 +70,7 @@ Therefore, in the current severe security contract vulnerability, an effective s
 
 
 ### Data
-Code Fragment focuses on the reentrancy vulnerabilities in the smart contract(solidity programs). In total, the Code Fragment database contains 1470 code fragments, including 197 vulnerable code gadgets and 1273 code gadgets that are not vulnerable. Due to the limited number of smart contracts on Ethereum, we reused some smart contracts.
+Code Fragment focuses on the reentrancy vulnerabilities in the smart contract(solidity programs). In total, the Code Fragment database contains 1671 code fragments, including 197 vulnerable code gadgets and 1273 code gadgets that are not vulnerable. Due to the limited number of smart contracts on Ethereum, we reused some smart contracts.
 
 #### How to construct the code fragment?
 * Remove all comments from the solidity source code. Remove comment tool available [here](https://github.com/Messi-Q/Automation-Tools/blob/master/delete_comment_official.py)
@@ -175,16 +175,16 @@ function transfer(address _to, uint _value, bytes _data, string _custom_fallback
 Examples:
 ```shell
 python SmConVulDetector.py --dataset train_data/reentrancy_1671.txt
-python SmConVulDetector.py --dataset data/reentrancy_1671.txt --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10 --batch_size 32
+python SmConVulDetector.py --dataset train_data/reentrancy_1671.txt --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10 --batch_size 32
 ```
 
 Using script：
 Repeating 10 times with `train.sh`.
 ```shell
-for i in $(seq 1 10); do python SmConVulDetector.py --model BLSTM | tee logs/smartcheck_"$i".log; done
+for i in $(seq 1 10); do python SmConVulDetector.py | tee evaluations/logs/blstm_att/smartcheck_"$i".log;; done
 ./train.sh
 ```
-Then, you can find the training results in the `logs`.
+Then, you can find the training results in the `evaluations/logs`.
 
 
 ## References
