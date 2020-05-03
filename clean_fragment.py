@@ -11,10 +11,10 @@ keywords = frozenset(
      'NULL', 'uint256', 'uint128', 'uint8', 'uint16', 'address', 'call', 'msg', 'value', 'sender', 'notConfirmed',
      'private', 'onlyOwner', 'internal', 'onlyGovernor', 'onlyCommittee', 'onlyAdmin', 'onlyPlayers', 'ownerExists',
      'onlyManager', 'onlyHuman', 'only_owner', 'onlyCongressMembers', 'preventReentry', 'noEther', 'onlyMembers',
-     'onlyProxyOwner', 'confirmed'})
+     'onlyProxyOwner', 'confirmed', 'mapping'})
 
 # holds known non-user-defined functions; immutable set
-main_set = frozenset({'function', 'constructor', 'modifier'})
+main_set = frozenset({'function', 'constructor', 'modifier', 'contract'})
 
 # arguments in main function; immutable set
 main_args = frozenset({'argc', 'argv'})
@@ -100,17 +100,19 @@ def clean_fragment(fragment):
 
 
 if __name__ == '__main__':
-    test1 = ['function WithdrawToHolder(address _addr, uint _wei) public onlyOwner payable',
-             'if(Holders[_addr]>0)',
-             'if(_addr.call.value(_wei)())',
-             'Holders[_addr]-=_wei;']
-    test2 = ['function executeTransaction(bytes32 transactionId) public notExecuted(transactionId) {',
-             'if (isConfirmed(transactionId)) {', 'Transaction storage txn = transactions[transactionId];',
-             'txn.executed = true;', 'if (!txn.destination.call.value(txn.value)(txn.data))', 'revert();',
-             'Execution(transactionId);',
-             'function confirmTransaction(bytes32 transactionId) public ownerExists(msg.sender) notConfirmed(transactionId, msg.sender) {',
-             'confirmations[transactionId][msg.sender] = true;', 'Confirmation(msg.sender, transactionId);',
-             'executeTransaction(transactionId);'
-             ]
+    test1 = ['contract Owner{',
+             'mapping (address => uint) private userBalances;',
+             'mapping (address => bool) private claimedBonus;',
+             'mapping (address => uint) private rewardsForA;',
+             'function WithdrawReward(address recipient) public {',
+             'uint amountToWithdraw = rewardsForA[recipient];',
+             'rewardsForA[recipient] = 0;',
+             'require(recipient.call.value(amountToWithdraw)());}',
+             ' function GetFirstWithdrawalBonus(address recipient) public {',
+             'if (claimedBonus[recipient] == false) {',
+             'throw;}',
+             'rewardsForA[recipient] += 100;',
+             'WithdrawReward(recipient);',
+             'claimedBonus[recipient] = true;}}']
     print(clean_fragment(test1))
-    print(clean_fragment(test2))
+

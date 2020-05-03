@@ -1,8 +1,8 @@
 InputSmartContractDir = "../contracts/time/"
-SmartContractName = "./block.timestamp/graph_data_name_185.txt"
-SmartContractLabel = "./block.timestamp/graph_data_label_185.txt"
-SmartContractNumber = "./block.timestamp/graph_data_number_185.txt"
-out = "./block.timestamp/timestamp.txt"
+SmartContractName = "./timestamp/graph_data_name_185.txt"
+SmartContractLabel = "./timestamp/graph_data_label_185.txt"
+SmartContractNumber = "./timestamp/graph_data_number_185.txt"
+out = "./timestamp/timestamp.txt"
 
 ContractName = open(SmartContractName, "r")
 ContractNames = ContractName.readlines()

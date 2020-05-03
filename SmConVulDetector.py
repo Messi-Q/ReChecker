@@ -101,8 +101,8 @@ def main():
         model = Simple_RNN(df, name=base)
     elif args.model == 'LSTM_Model':
         model = LSTM_Model(df, name=base)
-    # model.train()
-    model.test()
+    model.train()
+    # model.test()
 
 
 if __name__ == "__main__":
