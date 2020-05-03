@@ -102,7 +102,7 @@ def main():
     elif args.model == 'LSTM_Model':
         model = LSTM_Model(df, name=base)
     model.train()
-    # model.test()
+    model.test()
 
 
 if __name__ == "__main__":
