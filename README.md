@@ -79,31 +79,6 @@ Code Fragment focuses on the reentrancy vulnerabilities in the smart contract(so
 
 <div align=center><img width="700" height="310" src="./figs/code_fragment.png"/></div>
 
-All of the smart contracts dataset in these folders in the following structure respectively.
-```shell
-${VulDeeSmartContract}
-├── data
-│   ├── SmartContract.txt
-│   └── SmartContractFull.txt
-├── code_fragment_with_callvalue
-│   └── ${file_name}.sol
-├── code_fragment_without_callvalue
-│   └── ${file_name}.sol
-├── smart_contract_with_callvalue
-│   └── ${file_name}.sol
-└── smart_contract_without_callvalue
-    └── ${file_name}.sol
-```
-
-* `data/SmartContract.txt`: This is the code fragment for all functions that include `call.value`. Moreover, it is already labeled.
-* `data/SmartContractFull.txt`: This is the code fragment that includes not only the `call.value` function but also key functions. Moreover, it is already labeled.
-* `code_fragment_with_callvalue`: This is the code fragment after each smart contract is extracted with `call.value`.
-* `code_fragment_without_callvalue`: This is the code fragment after each smart contract is extracted without `call.value`.
-* `smart_contract_with_callvalue`: This is the smart contract source code with `call.value`.
-* `smart_contract_without_callvalue`: This is the smart contract source code without `call.value`.
-
-We have implemented a function that automatically extracts code fragments and presents them in this repository.
-
 ### Models
 In our experiment, all hyperparameters are the same for the baseline LSTM, GRU, BLSTM, and BLSTM+Attention, which hyperparameters from `parser.py` are used.
 
@@ -128,7 +103,7 @@ python SmConVulDetector.py --model BLSTM_Attention # to run BLSTM with Attention
 * Tokenizes gadget (converts to symbols, operators, keywords).
 * Uses Word2Vec to convert tokens to embeddings.
 * Combines token embeddings in a gadget to create 2D gadget vector.
-4. `automatic_generate_code_fragment.py`
+4. `AutoExtractCode.py`
 * All functions in the smart contract code are automatically split and stored.
 * Find the function where call.value is located and the superior function that called the function.
 * Assemble the functions found into a code fragment of a smart contract.
@@ -199,8 +174,8 @@ function transfer(address _to, uint _value, bytes _data, string _custom_fallback
 
 Examples:
 ```shell
-python SmConVulDetector.py --dataset data/SmartContract.txt
-python SmConVulDetector.py --dataset data/SmartContract.txt --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10 --batch_size 32
+python SmConVulDetector.py --dataset train_data/reentrancy_1671.txt
+python SmConVulDetector.py --dataset data/reentrancy_1671.txt --model BLSTM --lr 0.002 --dropout 0.5 --vector_dim 100 --epochs 10 --batch_size 32
 ```
 
 Using script：
