@@ -29,7 +29,8 @@ This repository contains the smart contract dataset of source code and processed
 
 ### Dataset
 Original Ethereum smart contracts:  [Etherscan_contract](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
-The train data after normalization in `data`.
+
+The train data after normalization in `train_data`.
 
 ## Overview
 
